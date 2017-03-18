@@ -1,0 +1,52 @@
+﻿#This document describes the data and associated code used to create the NODC Ocean Heat Content maps.
+
+Data used are 0-700m seasonal (3-month periods) and yearly from NODC globally analyzed fields at the following url:
+ http://www.nodc.noaa.gov/OC5/3M_HEAT_CONTENT/heat_global.html
+
+Methodology described in Levitus et al.:
+http://data.nodc.noaa.gov/woa/PUBLICATIONS/grlheat12.pdf
+An excerpt from above paper regarding the technique for calculating anomaly:
+"From every observed one-degree mean temperature value at every standard depth level we subtract off a climatological value. For this purpose we use the monthly climatological fields of temperature 
+from Locarnini et al. [2010]." The Locarnini work described in the 2009 World Ocean Atlas (ftp://ftp.nodc.noaa.gov/pub/WOA09/DOC/woa09_vol1_text.pdf) states: "Temperature and salinity climatologies are the average of five decadal climatologies for the following time periods: 1955-1964, 1965-1974, 1975-1984, 1985-1994, and 1995-2006".
+
+
+Abstract:
+This project consists of a suite of python scripts that generate maps of the NODC Ocean Heat Content (OHC) data. These data are 
+obtained from the NODC globally analyzed fields at the url mentioned above. The scripts create several different map projections 
+(Hammer-Aitoff, cylindrical equidistant, or Robinson) based on the image size. The image sizes and style are based on the 
+Data Snapshots style guide developed for the NNVL global temperature anomaly scripts 
+(https://github.com/LarryBelcher/GHCN_Global/blob/master/README). 
+
+
+The basic methodology used here is to download the NODC data in netcdf format. These files are continually updated following a given
+seasonal period and/or year. Once downloaded, the data are projected onto a cylindrical equidistant (CE) map with no additional 
+layers (e.g., coastlines, borders...). Once the CE map for a given year or seasonal period has been created, the data are projected 
+onto a “final” map that includes coastlines, shaded continents, legend, and other relevant map layers.
+
+
+Before creating new maps, update the data using the c-shell script: update_data.csh
+
+Python script listing:
+
+
+
+SeasonalOHCcdf2cyl.py – Routine to create the “initial” seasonal CE map with no additional layers
+
+SeasonalOHCcdf2cylBlank.py - Routine to create the “initial” seasonal CE map for the “no data” image
+
+YearlyOHCcdf2cyl.py - Routine to create the “initial” annual CE map with no additional layers
+
+YearlyOHCcdf2cylBlank.py - Routine to create the “initial” annual CE map for the “no data” image
+
+nodc_seasonal_driver.py
+
+nodc_seasonal_map.py
+
+nodc_seasonal_colorbar.py
+
+nodc_yearly_driver.py
+
+nodc_yearly_map.py
+
+nodc_yearly_colorbar.py
+
